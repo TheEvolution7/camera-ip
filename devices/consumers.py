@@ -4,7 +4,6 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 import base64
 import cv2
 import asyncio
-import dlib
 import numpy as np
 from channels.db import database_sync_to_async
 
@@ -214,11 +213,11 @@ class CameraStreamConsumer(AsyncWebsocketConsumer):
                             2,
                         )
 
-                        tracker = dlib.correlation_tracker()
-                        rect = dlib.rectangle(startX, startY, endX, endY)
-                        tracker.start_track(rgb, rect)
+                        # tracker = dlib.correlation_tracker()
+                        # rect = dlib.rectangle(startX, startY, endX, endY)
+                        # tracker.start_track(rgb, rect)
 
-                        trackers.append(tracker)
+                        # trackers.append(tracker)
 
             else:
                 for tracker in trackers:
