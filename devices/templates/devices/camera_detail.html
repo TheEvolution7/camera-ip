@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block bodydata %}
+  data-kt-app-aside-enabled="true"
+  data-kt-app-aside-fixed="true"
+  data-kt-app-aside-push-footer="true"
+{% endblock bodydata %}
+{% block content %}
+  <div class="card card-flush h-100">
+    <div class="card-header bg-black">
+      <h3 class="card-title fw-bold text-white">Player</h3>
+      <div class="card-toolbar"></div>
+    </div>
+    <div class="card-body bg-black pt-0">
+      <div class="mb-6 text-center">
+        <img src="/static/assets/media/svg/misc/video-play.svg"
+             id="camera-feed"
+             class="img-fluid" />
+      </div>
+      <div class="text-center mb-5">
+        <h1 class="text-white fw-bold">Strange Friends</h1>
+        <span class="text-white opacity-75 fw-semibold">Theresa Webb</span>
+      </div>
+    </div>
+    <div class="card-footer bg-primary p-0 pb-9">
+      <div class="mt-n10">
+        <div class="mb-5">
+          <div class="d-flex flex-stack px-4 text-white opacity-75">
+            <span class="current-time" data-kt-element="current-time">0:00</span>
+            <span class="duration" data-kt-element="duration">0:00</span>
+          </div>
+          <input type="range"
+                 class="form-range"
+                 data-kt-element="progress"
+                 min="0"
+                 max="100"
+                 value="0"
+                 step="0.01" />
+        </div>
+        <div class="d-flex flex-center">
+          <button class="btn btn-icon mx-1" data-kt-element="replay-button">
+            <i class="bi bi-arrow-repeat fs-2 text-white"></i>
+          </button>
+          <button class="btn btn-icon mx-1" data-kt-element="play-prev-button">
+            <i class='bi bi-caret-left-fill fs-2 text-white'></i>
+          </button>
+          <button class="btn btn-icon mx-6 play-pause" data-kt-element="play-button">
+            <i class="bi bi-play-fill text-white fs-4x" data-kt-element="play-icon"></i>
+            <i class="bi bi-pause-fill text-white fs-4x d-none"
+               data-kt-element="pause-icon"></i>
+          </button>
+          <button class="btn btn-icon mx-1 next" data-kt-element="play-next-button">
+            <i class='bi bi-caret-right-fill fs-2 text-white'></i>
+          </button>
+          <button class="btn btn-icon mx-1" data-kt-element="shuffle-button">
+            <i class="bi bi-shuffle fs-2 text-white"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+{% block aside %}
+  {% include "./camera_aside.html" %}
+{% endblock aside %}
+{% block js %}
+{% if object.privacy_mode %}
+<script>
+  $(document).ready(function() {
+    const pk = "{{ object.id }}"
+    console.log(window.location.host)
+    const ws = new WebSocket('ws:' + window.location.host + '/ws/camera-stream/' + pk + "/");
+    
+    ws.onmessage = function(event) {
+      const data = JSON.parse(event.data); 
+        $('#camera-feed').attr('src', 'data:image/jpeg;base64,' + data.jpg_as_text);
+        
+    };
+});
+</script>
+{% endif %}
+{% endblock js %}

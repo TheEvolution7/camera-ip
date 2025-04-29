@@ -1,0 +1,51 @@
+<div id="kt_app_aside"
+     class="app-aside flex-column mt-7"
+     data-kt-drawer="true"
+     data-kt-drawer-name="app-aside"
+     data-kt-drawer-activate="{default: true, lg: false}"
+     data-kt-drawer-overlay="true"
+     data-kt-drawer-width="auto"
+     data-kt-drawer-direction="end"
+     data-kt-drawer-toggle="#kt_app_aside_toggle">
+  <div id="kt_app_aside_wrapper"
+       class="hover-scroll-y px-5 mx-5 my-5"
+       data-kt-scroll="true"
+       data-kt-scroll-activate="true"
+       data-kt-scroll-height="auto"
+       data-kt-scroll-dependencies="#kt_app_header"
+       data-kt-scroll-wrappers="#kt_app_aside"
+       data-kt-scroll-offset="5px"
+       data-kt-scroll-save-state="true">
+    <div class="card card-reset card-p-0">
+      <div class="card-header align-items-center min-h-auto mb-7">
+        <h3 class="card-title text-gray-900 fs-3 fw-bold py-0 mb-0">Shipment History</h3>
+        <div class="card-toolbar mb-0">
+          <a href="#"
+             class="btn btn-sm btn-light"
+             data-bs-toggle='tooltip'
+             data-bs-dismiss='click'
+             data-bs-custom-class="tooltip-inverse"
+             title="Logistics App is coming soon">View All</a>
+        </div>
+      </div>
+      <div class="card-body">
+        <form method="post" action="{% url "devices:camera_update" object.pk %}">
+          {% csrf_token %}
+          <div class="row gy-5">
+            {% for field in form %}
+              <div class="col-6">
+                {{ field }}
+                <label for="{{ field.id_for_label }}" class="btn btn-light-primary ratio ratio-1x1">
+                  <div class="d-flex flex-center flex-column gap-3">
+                    <i class="{{ field.field.widget.attrs.icon }}"></i>
+                    <small>{{ field.label }}</small>
+                  </div>
+                </label>
+              </div>
+            {% endfor %}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

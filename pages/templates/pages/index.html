@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="row row-cols-4 gy-7">
+    {% for device in devices %}
+      <div class="col">
+        <a href="{{ device.get_absolute_url }}" class="card card-flush">
+          <div class="card-header">
+            <div class="card-title">
+              <div class="symbol">
+                <img src="/static/assets/media/misc/image.png" />
+              </div>
+            </div>
+            <div class="card-toolbar">
+              <button type="button" class="btn btn-sm btn-light">Offline</button>
+            </div>
+          </div>
+          <div class="card-body text-center fw-bold">{{ device }}</div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock content %}

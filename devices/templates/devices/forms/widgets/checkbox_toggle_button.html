@@ -1,0 +1,9 @@
+<input type="{{ widget.type }}"
+       {% comment %} class="btn-check" {% endcomment %}
+       name="{{ widget.name }}"
+       id="{{ widget.name }}"
+       onchange="this.form.submit()"
+       value="{{ widget.value }}"
+       {% if widget.disabled %}disabled{% endif %}
+       {% if widget.required %}required{% endif %}
+       {% if widget.value %}checked{% endif %}/>
