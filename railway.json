@@ -1,6 +1,6 @@
 {
     "$schema": "https://railway.app/railway.schema.json",
     "deploy": {
-        "startCommand": "daphne _smarthome.asgi:application"
+        "startCommand": "daphne -p 8000 _smarthome.asgi:application"
     }
 }
