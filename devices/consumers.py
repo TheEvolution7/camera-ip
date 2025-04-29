@@ -117,8 +117,8 @@ class CameraStreamConsumer(AsyncWebsocketConsumer):
         return 1
 
     async def send_video_stream(self):
-        vc = cv2.VideoCapture(os.path.join(BASE_DIR, "mobilenet_ssd", "test.mp4"))
-        # vc = cv2.VideoCapture(0)
+        # vc = cv2.VideoCapture(os.path.join(BASE_DIR, "mobilenet_ssd", "test.mp4"))
+        vc = cv2.VideoCapture(0)
         prototxt = os.path.join(
             BASE_DIR, "mobilenet_ssd", "MobileNetSSD_deploy.prototxt"
         )
