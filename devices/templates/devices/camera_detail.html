@@ -68,7 +68,7 @@
   $(document).ready(function() {
     const pk = "{{ object.id }}"
     console.log(window.location.host)
-    const ws = new WebSocket('ws:' + window.location.host + '/ws/camera-stream/' + pk + "/");
+    const ws = new WebSocket('wss:' + window.location.host + '/ws/camera-stream/' + pk + "/");
     
     ws.onmessage = function(event) {
       const data = JSON.parse(event.data); 
